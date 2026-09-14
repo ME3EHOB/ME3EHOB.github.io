@@ -12,17 +12,37 @@ body {
     min-height: 100vh;
 }
 
+/* Анимированный градиент - общий */
+@keyframes colorShift {
+    0% { color: #ff2a4d; border-color: #ff2a4d; }
+    50% { color: #00d9ff; border-color: #00d9ff; }
+    100% { color: #ff2a4d; border-color: #ff2a4d; }
+}
+
+@keyframes borderShift {
+    0% { border-color: #ff2a4d; box-shadow: 0 0 20px rgba(255, 42, 77, 0.5); }
+    50% { border-color: #00d9ff; box-shadow: 0 0 20px rgba(0, 217, 255, 0.5); }
+    100% { border-color: #ff2a4d; box-shadow: 0 0 20px rgba(255, 42, 77, 0.5); }
+}
+
+@keyframes textGlow {
+    0% { text-shadow: 0 0 20px rgba(255, 42, 77, 0.7); }
+    50% { text-shadow: 0 0 20px rgba(0, 217, 255, 0.7); }
+    100% { text-shadow: 0 0 20px rgba(255, 42, 77, 0.7); }
+}
+
 header {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
     padding: 60px 20px;
     text-align: center;
-    border-bottom: 3px solid #00d9ff;
+    border-bottom: 3px solid #ff2a4d;
+    animation: borderShift 4s infinite ease-in-out;
 }
 
 header h1 {
     font-size: 48px;
-    color: #00d9ff;
     margin-bottom: 10px;
+    animation: colorShift 4s infinite ease-in-out, textGlow 4s infinite ease-in-out;
 }
 
 header p {
@@ -41,14 +61,15 @@ main {
     padding: 40px 20px;
     background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
     border-radius: 15px;
-    border: 1px solid #00d9ff;
+    border: 2px solid #ff2a4d;
     margin-bottom: 50px;
+    animation: borderShift 4s infinite ease-in-out;
 }
 
 #countdown-section h2 {
-    color: #00d9ff;
     font-size: 28px;
     margin-bottom: 30px;
+    animation: colorShift 4s infinite ease-in-out, textGlow 4s infinite ease-in-out;
 }
 
 .countdown {
@@ -64,21 +85,20 @@ main {
     border-radius: 10px;
     min-width: 100px;
     border: 1px solid #2a2a4e;
-    transition: transform 0.3s, border-color 0.3s;
+    transition: transform 0.3s;
+    animation: borderShift 4s infinite ease-in-out;
 }
 
 .time-block:hover {
     transform: translateY(-5px);
-    border-color: #00d9ff;
 }
 
 .time-block span {
     font-size: 48px;
     font-weight: bold;
-    color: #00d9ff;
     display: block;
     font-family: monospace;
-    text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    animation: colorShift 4s infinite ease-in-out, textGlow 4s infinite ease-in-out;
 }
 
 .time-block p {
