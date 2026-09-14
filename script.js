@@ -4,11 +4,11 @@ function updateCountdown() {
     const currentYear = now.getFullYear();
     
     // 22 апреля текущего года (месяцы с 0: 3 = апрель)
-    let targetDate = new Date(currentYear, 3, 22, 0, 0, 0);
+    let targetDate = new Date(currentYear, 9, 22, 0, 0, 0);
     
     // Если 22 апреля уже прошло - берём следующий год
     if (now > targetDate) {
-        targetDate = new Date(currentYear + 1, 3, 22, 0, 0, 0);
+        targetDate = new Date(currentYear + 1, 9, 22, 0, 0, 0);
     }
     
     const diff = targetDate - now;
