@@ -3,10 +3,8 @@ function updateCountdown() {
     const now = new Date();
     const currentYear = now.getFullYear();
     
-    // 22 октября текущего года (месяцы с 0: 9 = октябрь)
     let targetDate = new Date(currentYear, 9, 22, 0, 0, 0);
     
-    // Если 22 октября уже прошло - берём следующий год
     if (now > targetDate) {
         targetDate = new Date(currentYear + 1, 9, 22, 0, 0, 0);
     }
@@ -24,6 +22,27 @@ function updateCountdown() {
     document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 }
 
-// Обновляем каждую секунду
 setInterval(updateCountdown, 1000);
 updateCountdown();
+
+// ===== ГЛИТЧ-ЭФФЕКТ =====
+function triggerGlitch() {
+    document.body.classList.add("glitch");
+    
+    // Убираем класс через 300мс (длительность анимации)
+    setTimeout(() => {
+        document.body.classList.remove("glitch");
+    }, 300);
+}
+
+// Случайный глитч каждые 5-15 секунд
+function scheduleGlitch() {
+    const randomDelay = 5000 + Math.random() * 10000; // от 5 до 15 секунд
+    setTimeout(() => {
+        triggerGlitch();
+        scheduleGlitch(); // планируем следующий
+    }, randomDelay);
+}
+
+// Запускаем после загрузки
+scheduleGlitch();
