@@ -5,60 +5,91 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #0f0f1e;
-    color: #c8c8c8;
+    font-family: "Courier New", monospace;
+    background: #000000;
+    color: #8a8a8a;
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
+    text-shadow: 0 0 2px rgba(255, 0, 0, 0.3);
+}
+
+/* Тонкая сетка-помеха поверх всего */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9997;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 0, 0, 0.03) 0px,
+        rgba(255, 0, 0, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
 }
 
 /* Символы R. как глитч */
 .r-symbol {
     position: fixed;
-    color: #c8c8c8;
-    font-family: monospace;
+    color: #ff0000;
+    font-family: "Courier New", monospace;
     font-weight: bold;
     pointer-events: none;
     z-index: 9998;
     user-select: none;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
 }
 
-@keyframes colorShift {
-    0% { color: #ff2a4d; border-color: #ff2a4d; }
-    50% { color: #00d9ff; border-color: #00d9ff; }
-    100% { color: #ff2a4d; border-color: #ff2a4d; }
-}
-
-@keyframes borderShift {
-    0% { border-color: #ff2a4d; box-shadow: 0 0 20px rgba(255, 42, 77, 0.4); }
-    50% { border-color: #00d9ff; box-shadow: 0 0 20px rgba(0, 217, 255, 0.4); }
-    100% { border-color: #ff2a4d; box-shadow: 0 0 20px rgba(255, 42, 77, 0.4); }
-}
-
-@keyframes textGlow {
-    0% { text-shadow: 0 0 20px rgba(255, 42, 77, 0.5); }
-    50% { text-shadow: 0 0 20px rgba(0, 217, 255, 0.5); }
-    100% { text-shadow: 0 0 20px rgba(255, 42, 77, 0.5); }
+/* Медленное пульсирование красного свечения */
+@keyframes redPulse {
+    0% { 
+        color: #cc0000; 
+        border-color: #cc0000; 
+        text-shadow: 0 0 15px rgba(204, 0, 0, 0.5);
+        box-shadow: 0 0 15px rgba(204, 0, 0, 0.3);
+    }
+    50% { 
+        color: #ff0000; 
+        border-color: #ff0000; 
+        text-shadow: 0 0 30px rgba(255, 0, 0, 0.9);
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+    }
+    100% { 
+        color: #cc0000; 
+        border-color: #cc0000; 
+        text-shadow: 0 0 15px rgba(204, 0, 0, 0.5);
+        box-shadow: 0 0 15px rgba(204, 0, 0, 0.3);
+    }
 }
 
 header {
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: linear-gradient(180deg, #0a0000, #000000);
     padding: 60px 20px;
     text-align: center;
-    border-bottom: 3px solid #ff2a4d;
-    animation: borderShift 16s infinite ease-in-out;
+    border-bottom: 2px solid #ff0000;
+    animation: redPulse 4s infinite ease-in-out;
+    position: relative;
 }
 
 header h1 {
-    font-size: 48px;
+    font-size: 52px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
     margin-bottom: 10px;
-    animation: colorShift 16s infinite ease-in-out, textGlow 16s infinite ease-in-out;
+    animation: redPulse 4s infinite ease-in-out;
+    font-weight: bold;
 }
 
 header p {
-    font-size: 18px;
-    color: #909090;
+    font-size: 16px;
+    color: #5a5a5a;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
 main {
@@ -69,74 +100,86 @@ main {
 
 #countdown-section {
     text-align: center;
-    padding: 40px 20px;
-    background: linear-gradient(135deg, #1a1a2e, #0f0f1e);
-    border-radius: 15px;
-    border: 2px solid #ff2a4d;
+    padding: 50px 20px;
+    background: #050505;
+    border-radius: 5px;
+    border: 1px solid #ff0000;
     margin-bottom: 50px;
-    animation: borderShift 16s infinite ease-in-out;
+    animation: redPulse 4s infinite ease-in-out;
+    position: relative;
 }
 
 #countdown-section h2 {
-    font-size: 28px;
-    margin-bottom: 30px;
-    animation: colorShift 16s infinite ease-in-out, textGlow 16s infinite ease-in-out;
+    font-size: 30px;
+    margin-bottom: 40px;
+    letter-spacing: 4px;
+    animation: redPulse 4s infinite ease-in-out;
 }
 
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
 .time-block {
-    background: #0a0a15;
-    padding: 20px 25px;
-    border-radius: 10px;
-    min-width: 100px;
-    border: 1px solid #2a2a4e;
-    transition: transform 0.3s;
-    animation: borderShift 16s infinite ease-in-out;
+    background: #0a0000;
+    padding: 25px 20px;
+    border-radius: 3px;
+    min-width: 110px;
+    border: 1px solid #8a0000;
+    transition: all 0.4s;
+    animation: redPulse 4s infinite ease-in-out;
+    position: relative;
 }
 
 .time-block:hover {
-    transform: translateY(-5px);
+    background: #1a0000;
+    border-color: #ff0000;
+    transform: scale(1.03);
 }
 
 .time-block span {
-    font-size: 48px;
+    font-size: 52px;
     font-weight: bold;
     display: block;
-    font-family: monospace;
-    animation: colorShift 16s infinite ease-in-out, textGlow 16s infinite ease-in-out;
+    font-family: "Courier New", monospace;
+    animation: redPulse 4s infinite ease-in-out;
+    letter-spacing: 2px;
 }
 
 .time-block p {
-    color: #909090;
-    font-size: 14px;
-    margin: 10px 0 0 0;
+    color: #5a5a5a;
+    font-size: 12px;
+    margin: 12px 0 0 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
 }
 
 footer {
     text-align: center;
-    padding: 30px;
-    background: #0a0a15;
-    color: #606060;
-    border-top: 1px solid #1a1a2e;
+    padding: 40px;
+    background: #000000;
+    color: #3a3a3a;
+    border-top: 1px solid #3a0000;
+    letter-spacing: 2px;
+    font-size: 12px;
 }
 
 @media (max-width: 600px) {
     header h1 {
-        font-size: 32px;
+        font-size: 30px;
+        letter-spacing: 3px;
     }
     .time-block span {
-        font-size: 32px;
+        font-size: 34px;
     }
     .time-block {
-        padding: 15px;
-        min-width: 70px;
+        padding: 18px;
+        min-width: 75px;
     }
-}
+    #countdown-section h2 {
+        font-size: 20px;
+    }
+    }
