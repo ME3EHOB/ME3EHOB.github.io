@@ -84,7 +84,7 @@ function startTitleGlitch() {
     const originalText = "👀👀👀";
     
     function scheduleNextGlitch() {
-        const delay = 15000 + Math.random() * 25000;
+        const delay = 5000 + Math.random() * 10000;
         
         setTimeout(() => {
             title.textContent = "R.";
