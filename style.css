@@ -273,3 +273,13 @@ footer {
         min-width: 70px;
     }
 }
+/* Символы R. как глитч */
+.r-symbol {
+    position: fixed;
+    color: #c8c8c8;
+    font-family: monospace;
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 9998;
+    user-select: none;
+}
