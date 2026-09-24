@@ -46,3 +46,59 @@ function scheduleGlitch() {
 
 // Запускаем после загрузки
 scheduleGlitch();
+// ===== СИМВОЛЫ "R." КАК ГЛИТЧ =====
+function spawnRSymbols() {
+    const count = Math.floor(Math.random() * 5) + 1; // 1-5 символов
+    
+    for (let i = 0; i < count; i++) {
+        // Небольшая задержка между символами, чтобы появлялись не все разом
+        setTimeout(() => {
+            createRSymbol();
+        }, Math.random() * 500);
+    }
+}
+
+function createRSymbol() {
+    const symbol = document.createElement("div");
+    symbol.className = "r-symbol";
+    symbol.textContent = "R.";
+    
+    // Случайный размер от 12 до 120px
+    const size = 12 + Math.random() * 108;
+    symbol.style.fontSize = size + "px";
+    
+    // Случайная прозрачность от 0.05 до 0.5
+    const opacity = 0.05 + Math.random() * 0.45;
+    symbol.style.opacity = opacity;
+    
+    // Случайная позиция на экране
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    symbol.style.left = x + "%";
+    symbol.style.top = y + "%";
+    
+    // Случайный цвет — красный или голубой оттенок
+    if (Math.random() > 0.7) {
+        symbol.style.color = Math.random() > 0.5 ? "#ff2a4d" : "#00d9ff";
+    }
+    
+    document.body.appendChild(symbol);
+    
+    // Длительность жизни символа от 100 до 500мс (резко появился-исчез)
+    const lifetime = 100 + Math.random() * 400;
+    setTimeout(() => {
+        symbol.remove();
+    }, lifetime);
+}
+
+// Запускаем появление каждые 2-6 секунд
+function scheduleRSymbols() {
+    const delay = 2000 + Math.random() * 4000;
+    setTimeout(() => {
+        spawnRSymbols();
+        scheduleRSymbols();
+    }, delay);
+}
+
+// Старт
+scheduleRSymbols();
