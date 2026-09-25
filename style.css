@@ -167,7 +167,7 @@ footer {
 #splash {
     position: absolute;
     right: 30%;
-    top: 130px;
+    top: 130px !important;
     color: #8b0000 !important;
     font-size: 15px;
     font-style: italic;
