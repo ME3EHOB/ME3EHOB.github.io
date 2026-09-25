@@ -166,7 +166,7 @@ footer {
 /* Сплеш как в Minecraft */
 #splash {
     position: absolute;
-    right: 80% !important;
+    right: 20% !important;
     top: 90px !important;
     color: #8b0000 !important;
     font-size: 15px;
