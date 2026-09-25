@@ -142,38 +142,55 @@ async function loadSplash() {
         }
         
         if (hasNoov) {
-            const parts = randomSplash.split("Noov");
-            
-            splashElement.innerHTML = "";
-            
-            parts.forEach((part, index) => {
-                if (part) {
-                    splashElement.appendChild(document.createTextNode(part));
-                }
-                
-                if (index < parts.length - 1) {
-                    const noovSpan = document.createElement("span");
-                    noovSpan.className = "noov-word";
-                    noovSpan.textContent = "Noov";
-                    splashElement.appendChild(noovSpan);
-                    
-                    if (Math.random() < 0.12) {
-                        setTimeout(() => {
-                            noovSpan.textContent = "Biiv";
-                            noovSpan.classList.add("biiv-word");
-                            
-                            const backDelay = 300 + Math.random() * 300;
-                            setTimeout(() => {
-                                noovSpan.textContent = "Noov";
-                                noovSpan.classList.remove("biiv-word");
-                            }, backDelay);
-                        }, 100 + Math.random() * 400);
-                    }
-                }
-            });
-        } else {
-            splashElement.textContent = randomSplash;
+    const parts = randomSplash.split("Noov");
+    
+    splashElement.innerHTML = "";
+    
+    const noovSpans = [];
+    
+    parts.forEach((part, index) => {
+        if (part) {
+            splashElement.appendChild(document.createTextNode(part));
         }
+        
+        if (index < parts.length - 1) {
+            const noovSpan = document.createElement("span");
+            noovSpan.className = "noov-word";
+            noovSpan.textContent = "Noov";
+            splashElement.appendChild(noovSpan);
+            noovSpans.push(noovSpan);
+        }
+    });
+    
+    // Регулярные глитчи в Biiv (пока страница открыта)
+    function scheduleBiiv() {
+        const delay = 3000 + Math.random() * 5000; // каждые 3-8 секунд
+        
+        setTimeout(() => {
+            if (Math.random() < 0.12) { // шанс 12%
+                noovSpans.forEach(span => {
+                    span.textContent = "Biiv";
+                    span.classList.add("biiv-word");
+                });
+                
+                const backDelay = 300 + Math.random() * 300;
+                setTimeout(() => {
+                    noovSpans.forEach(span => {
+                        span.textContent = "Noov";
+                        span.classList.remove("biiv-word");
+                    });
+                }, backDelay);
+            }
+            
+            // Продолжаем цикл
+            scheduleBiiv();
+        }, delay);
+    }
+    
+    scheduleBiiv();
+} else {
+    splashElement.textContent = randomSplash;
+}
         
         const rotation = -15 + Math.random() * 10;
         splashElement.style.transform = "rotate(" + rotation + "deg)";
