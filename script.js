@@ -54,7 +54,7 @@ function createRSymbol() {
     symbol.style.top = y + "%";
     
     if (Math.random() > 0.7) {
-        symbol.style.color = Math.random() > 0.5 ? "#ff2a4d" : "#00d9ff";
+        symbol.style.color = Math.random() > 0.5 ? "#8b0000" : "#a00000";
     }
     
     document.body.appendChild(symbol);
@@ -84,7 +84,7 @@ function startTitleGlitch() {
     const originalText = "👀👀👀";
     
     function scheduleNextGlitch() {
-        const delay = 5000 + Math.random() * 10000;
+        const delay = 15000 + Math.random() * 25000;
         
         setTimeout(() => {
             title.textContent = "R.";
@@ -111,3 +111,76 @@ function startTitleGlitch() {
 }
 
 startTitleGlitch();
+
+
+// ===== СПЛЕШИ (как в Minecraft) =====
+async function loadSplash() {
+    try {
+        const response = await fetch("splashes.txt");
+        const text = await response.text();
+        
+        const splashes = text
+            .split("\n")
+            .map(line => line.trim())
+            .filter(line => line.length > 0);
+        
+        if (splashes.length === 0) return;
+        
+        const randomSplash = splashes[Math.floor(Math.random() * splashes.length)];
+        
+        const hasNoov = randomSplash.includes("Noov");
+        
+        let splashElement = document.getElementById("splash");
+        if (!splashElement) {
+            splashElement = document.createElement("div");
+            splashElement.id = "splash";
+            
+            const h1 = document.querySelector("header h1");
+            if (h1) {
+                h1.parentNode.insertBefore(splashElement, h1.nextSibling);
+            }
+        }
+        
+        if (hasNoov) {
+            const parts = randomSplash.split("Noov");
+            
+            splashElement.innerHTML = "";
+            
+            parts.forEach((part, index) => {
+                if (part) {
+                    splashElement.appendChild(document.createTextNode(part));
+                }
+                
+                if (index < parts.length - 1) {
+                    const noovSpan = document.createElement("span");
+                    noovSpan.className = "noov-word";
+                    noovSpan.textContent = "Noov";
+                    splashElement.appendChild(noovSpan);
+                    
+                    if (Math.random() < 0.12) {
+                        setTimeout(() => {
+                            noovSpan.textContent = "Biiv";
+                            noovSpan.classList.add("biiv-word");
+                            
+                            const backDelay = 300 + Math.random() * 300;
+                            setTimeout(() => {
+                                noovSpan.textContent = "Noov";
+                                noovSpan.classList.remove("biiv-word");
+                            }, backDelay);
+                        }, 100 + Math.random() * 400);
+                    }
+                }
+            });
+        } else {
+            splashElement.textContent = randomSplash;
+        }
+        
+        const rotation = -15 + Math.random() * 10;
+        splashElement.style.transform = "rotate(" + rotation + "deg)";
+        
+    } catch (error) {
+        console.log("Не удалось загрузить сплеши:", error);
+    }
+}
+
+loadSplash();
