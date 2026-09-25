@@ -184,9 +184,9 @@ footer {
 }
 
 @keyframes splashPulse {
-    0% { transform: scale(1) rotate(-15deg); text-shadow: 0 0 8px rgba(160, 0, 0, 0.8), 0 0 15px rgba(160, 0, 0, 0.5), 1px 1px 0 #000000; }
-    50% { transform: scale(1.08) rotate(-15deg); text-shadow: 0 0 15px rgba(200, 0, 0, 1), 0 0 30px rgba(200, 0, 0, 0.7), 1px 1px 0 #000000; }
-    100% { transform: scale(1) rotate(-15deg); text-shadow: 0 0 8px rgba(160, 0, 0, 0.8), 0 0 15px rgba(160, 0, 0, 0.5), 1px 1px 0 #000000; }
+    0% { transform: scale(1) rotate(-15deg); }
+    50% { transform: scale(1.08) rotate(-15deg); }
+    100% { transform: scale(1) rotate(-15deg); }
 }
 
 /* Слово Noov — глитч и дёргание */
@@ -202,6 +202,7 @@ footer {
     position: relative;
     z-index: 11;
 }
+
 @keyframes noovGlitch {
     0% { transform: translate(0, 0); }
     20% { transform: translate(-2px, 1px); }
@@ -219,6 +220,7 @@ footer {
         0 0 30px rgba(0, 217, 255, 0.7) !important;
     animation: biivGlitch 0.1s infinite !important;
 }
+
 @keyframes biivGlitch {
     0% { transform: translate(0, 0) scale(1); }
     50% { transform: translate(-3px, 2px) scale(1.15); }
@@ -243,7 +245,7 @@ footer {
     }
     #splash {
         right: 5%;
-        top: 30px;
+        top: 40px;
         font-size: 11px;
     }
 }
