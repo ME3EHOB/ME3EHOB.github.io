@@ -141,7 +141,10 @@ async function loadSplash() {
             }
         }
         
-        if (hasNoov) {
+// Проверка на ссылку в сплеше (маркер |)
+const hasLink = randomSplash.includes("Tgk - ME3EHOB");
+
+if (hasNoov) {
     const parts = randomSplash.split("Noov");
     
     splashElement.innerHTML = "";
@@ -162,12 +165,12 @@ async function loadSplash() {
         }
     });
     
-    // Регулярные глитчи в Biiv (пока страница открыта)
+    // Глитч в Biiv
     function scheduleBiiv() {
-        const delay = 3000 + Math.random() * 5000; // каждые 3-8 секунд
+        const delay = 3000 + Math.random() * 5000;
         
         setTimeout(() => {
-            if (Math.random() < 0.12) { // шанс 12%
+            if (Math.random() < 0.12) {
                 noovSpans.forEach(span => {
                     span.textContent = "Biiv";
                     span.classList.add("biiv-word");
@@ -181,13 +184,24 @@ async function loadSplash() {
                     });
                 }, backDelay);
             }
-            
-            // Продолжаем цикл
             scheduleBiiv();
         }, delay);
     }
     
     scheduleBiiv();
+    
+} else if (hasLink) {
+    // Делаем ТГК-ссылку кликабельной
+    splashElement.innerHTML = "";
+    
+    const linkElement = document.createElement("a");
+    linkElement.href = "https://t.me/ME3EHOB";
+    linkElement.target = "_blank";
+    linkElement.textContent = "Tgk - ME3EHOB";
+    linkElement.className = "splash-link";
+    
+    splashElement.appendChild(linkElement);
+    
 } else {
     splashElement.textContent = randomSplash;
 }
